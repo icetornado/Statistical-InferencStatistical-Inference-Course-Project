@@ -80,15 +80,15 @@ ggsave(file.path(figureDir, "plot1.png"), width=6.4, height=4.8, dpi=124)
 ## Observation
 
 ```r
-sampleMean
+round(sampleMean, 4)
 ```
 
 ```
-## [1] 4.971972
+## [1] 4.972
 ```
 
 ```r
-normalMean
+round(normalMean, 4)
 ```
 
 ```
@@ -96,15 +96,15 @@ normalMean
 ```
 
 ```r
-sampleVar
+round(sampleVar, 4)
 ```
 
 ```
-## [1] 0.5954369
+## [1] 0.5954
 ```
 
 ```r
-normalVar
+round(normalVar, 4)
 ```
 
 ```

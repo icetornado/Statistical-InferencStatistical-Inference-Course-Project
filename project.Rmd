@@ -1,0 +1,52 @@
+---
+title: "Statistical Inference Course Project"
+author: "Trieu Tran"
+output: html_document
+---
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+## Loading library packages
+
+```{R echo=TRUE,results='hide',warning=FALSE,message=FALSE}
+library(knitr)
+library(ggplot2)
+
+## checking existence of a folder named "figure", if not then creating one to store plot figures
+figureDir <- 'figure'
+if (!file.exists(figureDir)){
+    dir.create(figureDir)
+} 
+```
+```{r echo=TRUE, warning=FALSE,message=FALSE}
+set.seed(12345)
+lambda <- 0.2
+n <- 40
+numSim <- 1000
+
+simMatrix <- replicate(numSim, rexp(n, rate = lambda))
+simColMeans <- colMeans(simMatrix)
+sampleMean <- mean(simColMeans)
+sampleSD <- sd(simColMeans)
+normalMean <- 1/lambda
+normalSD <- 1/lambda/sqrt(40)
+
+data <- data.frame(x = simColMeans, y = rnorm(1000, mean = normalMean, sd = normalSD))
+
+```
+As our prediction, the sample mean `r sprintf("%.2f", sampleMean)` is very close to the population mean `r sprintf("%.2f", normalMean)`
+
+```{r echo = TRUE, warning=FALSE, message=FALSE}
+p <- ggplot(data, aes(x = x))
+p <- p +  geom_histogram(aes(y = ..density..), fill = I("lightgreen"), col = I("black"), binwidth = 0.2) 
+p <- p + geom_density(aes(colour = "1")) + labs(x = "", y = "Density", title = "") 
+p <- p +  geom_density(aes(x = y, colour = "2")) 
+p <- p + geom_vline(color = "red", xintercept = 1/lambda)
+p <- p + geom_vline(color = "yellow", xintercept = sampleMean)
+p <- p + labs(x = "", y = "Density", title = "")
+p <- p + scale_colour_manual(values=c("1"="blue", "2"="orange"), name="", labels = c("Simulated", "Theoritical"))
+
+ggsave(file.path(figureDir, "plot1.png"), width=6.4, height=4.8, dpi=100)
+```

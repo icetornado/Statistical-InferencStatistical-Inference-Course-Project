@@ -1,16 +1,12 @@
----
-title: "Statistical Inference Course Project - Part 1"
-author: "Trieu Tran"
-date: "September 21, 2015"
-output: 
-  html_document: 
-    keep_md: yes
----
+# Statistical Inference Course Project - Part 1
+Trieu Tran  
+September 21, 2015  
 ## Synopsis
 This is the first part of the course project for the statistical inference class. The goal of this project is performing some statistical inference works such as, exploring inference by using simulation functionality of R to study the exponential distribution then comparing it with Central Limit Theorem.
 
 
-```{R echo=TRUE,results='hide',warning=FALSE,message=FALSE}
+
+```r
 library(knitr)
 library(ggplot2)
 
@@ -24,7 +20,8 @@ if (!file.exists(figureDir)){
 ### Random sampling from the exponential distribution 
 The function rexp of R stat package creates random values belong to the exponential distribution; and it requires two input parameters, n - number of observations (n = 40) and rate (lambda = 0.2).  The plan is running this simulation function a thousand times, a fairly large number of trials, collecting arithmetic mean of each trial, determining mean and standard deviation of collected trial means.
 
-```{r echo=TRUE, warning=FALSE,message=FALSE}
+
+```r
 ## initializing variables
 set.seed(12345)
 lambda <- 0.2
@@ -47,7 +44,8 @@ sampleVar <- sampleSD^2
 ## Random sampling from the normal distribution
 On the other hand, we use rnorm function to draw a thousand values from the normal distribution with mean equals to 1/lambda (mean = 1/lambda) and standard deviation equals to mean divided by square rooted of number of observation (sd = 1/lambda/sqrt(n)). 
 
-```{r echo=TRUE, warning=FALSE,message=FALSE}
+
+```r
 ## calculating normal (theoritical) mean, normal standard deviation and variance
 normalMean <- 1/lambda
 normalSD <- 1/lambda/sqrt(40)
@@ -57,7 +55,8 @@ normalVar <- normalSD^2
 data <- data.frame(x = simColMeans, y = rnorm(1000, mean = normalMean, sd = normalSD))
 ```
 ## Plotting histogram and PDF of sample and PDF of theoritical distribution
-```{r echo = TRUE, warning=FALSE, message=FALSE}
+
+```r
 p <- ggplot(data, aes(x = x))
 ## adding histogram
 p <- p +  geom_histogram(aes(y = ..density..), fill = I("lightgreen"), col = I("lightgreen"), alpha = 0.75, binwidth = 0.1) 
@@ -79,15 +78,39 @@ ggsave(file.path(figureDir, "plot1.png"), width=6.4, height=4.8, dpi=124)
 ![](figure/plot1.png)
 
 ## Observation
-```{r echo=TRUE}
+
+```r
 sampleMean
+```
+
+```
+## [1] 4.971972
+```
+
+```r
 normalMean
 ```
-1. The sample mean **`r sprintf("%.4f", sampleMean)`** (the vertical blue line in the plot) is very close to the theoretical (normal) mean **`r sprintf("%.4f", normalMean)`** (the vertical orange line in the plot), as predicted
-```{r echo=TRUE}
+
+```
+## [1] 5
+```
+1. The sample mean **4.9720** (the vertical blue line in the plot) is very close to the theoretical (normal) mean **5.0000** (the vertical orange line in the plot), as predicted
+
+```r
 sampleVar
+```
+
+```
+## [1] 0.5954369
+```
+
+```r
 normalVar
 ```
 
-2. Similiarity, variance of the sample is **`r sprintf("%.4f", sampleVar)`**, also approximately equals to variance of the normal variance **`r sprintf("%.4f", normalVar)`**
+```
+## [1] 0.625
+```
+
+2. Similiarity, variance of the sample is **0.5954**, also approximately equals to variance of the normal variance **0.6250**
 3. From the above plot, the probability density functions of both sample and theoritical distribution almost overlaps each other. Or we can say that the distribution of the sample means follows the normal distribution, as stated in the Central Limit Theorem.

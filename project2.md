@@ -1,17 +1,13 @@
----
-title: "Statistical Inference Course Project - Part 2"
-author: "Trieu Tran"
-date: "September 21, 2015"
-output: 
-  html_document: 
-    keep_md: yes
----
+# Statistical Inference Course Project - Part 2
+Trieu Tran  
+September 21, 2015  
 
 ## Synopsis
 This is the second part of the course project for the statistical inference class. The goal of this project is conducting some basic inferential data analysis on the "ToothGrowth"" data of R datasets package. The following is step-by-step execution and conlusion drawing from the analysis.
 
 ## Loading data
-```{R echo=TRUE,results='hide',warning=FALSE,message=FALSE}
+
+```r
 library(datasets)
 library(ggplot2)
 data("ToothGrowth")
@@ -35,7 +31,8 @@ str(ToothGrowth)
 
 Read more about the dataset: [https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/ToothGrowth.html](https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/ToothGrowth.html)
 
-```{r echo=TRUE, warning=FALSE,message=FALSE}
+
+```r
 ## plotting boxplots
 p <- ggplot(ToothGrowth, aes(x = supp, y = len))
 p <- p + geom_boxplot(aes(fill = supp)) 

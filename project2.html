@@ -95,7 +95,7 @@ str(ToothGrowth)</code></pre>
 <li><p>dose - dose of vitamin C supplements at three levels (0.5, 1 and 2 mg/day)</p></li>
 </ul>
 <p>Read more about the dataset: <a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/ToothGrowth.html"><a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/ToothGrowth.html" class="uri">https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/ToothGrowth.html</a></a></p>
-<pre class="r"><code>## plotting plotboxes
+<pre class="r"><code>## plotting boxplots
 p &lt;- ggplot(ToothGrowth, aes(x = supp, y = len))
 p &lt;- p + geom_boxplot(aes(fill = supp)) 
 p &lt;- p + labs(x = &quot;Supplement&quot;, y = &quot;Odontoblasts Cell Length&quot;)

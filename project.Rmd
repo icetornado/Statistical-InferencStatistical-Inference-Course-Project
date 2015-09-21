@@ -82,12 +82,9 @@ ggsave(file.path(figureDir, "plot1.png"), width=6.4, height=4.8, dpi=124)
 ```{r echo=TRUE}
 sampleMean
 normalMean
-```
-1. The sample mean **`r sprintf("%.4f", sampleMean)`** (the vertical blue line in the plot) is very close to the theoretical (normal) mean **`r sprintf("%.4f", normalMean)`** (the vertical orange line in the plot), as predicted
-```{r echo=TRUE}
 sampleVar
 normalVar
 ```
-
+1. The sample mean **`r sprintf("%.4f", sampleMean)`** (the vertical blue line in the plot) is very close to the theoretical (normal) mean **`r sprintf("%.4f", normalMean)`** (the vertical orange line in the plot), as predicted
 2. Similiarity, variance of the sample is **`r sprintf("%.4f", sampleVar)`**, also approximately equals to variance of the normal variance **`r sprintf("%.4f", normalVar)`**
 3. From the above plot, the probability density functions of both sample and theoritical distribution almost overlaps each other. Or we can say that the distribution of the sample means follows the normal distribution, as stated in the Central Limit Theorem.

@@ -94,7 +94,6 @@ normalMean
 ```
 ## [1] 5
 ```
-1. The sample mean **4.9720** (the vertical blue line in the plot) is very close to the theoretical (normal) mean **5.0000** (the vertical orange line in the plot), as predicted
 
 ```r
 sampleVar
@@ -111,6 +110,6 @@ normalVar
 ```
 ## [1] 0.625
 ```
-
+1. The sample mean **4.9720** (the vertical blue line in the plot) is very close to the theoretical (normal) mean **5.0000** (the vertical orange line in the plot), as predicted
 2. Similiarity, variance of the sample is **0.5954**, also approximately equals to variance of the normal variance **0.6250**
 3. From the above plot, the probability density functions of both sample and theoritical distribution almost overlaps each other. Or we can say that the distribution of the sample means follows the normal distribution, as stated in the Central Limit Theorem.

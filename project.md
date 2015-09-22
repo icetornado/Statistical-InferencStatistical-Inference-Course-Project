@@ -2,7 +2,7 @@
 Trieu Tran  
 September 21, 2015  
 ## Synopsis
-This is the first part of the course project for the statistical inference class. The goal of this project is performing some statistical inference works such as, exploring inference by using simulation functionality of R to study the exponential distribution then comparing it with Central Limit Theorem.
+This is the first part of the course project for the statistical inference class. The goal of this project is performing some statistical inferential works such as, exploring inference by using simulation functionality of R to study the exponential distribution then comparing it with Central Limit Theorem.
 
 
 
@@ -18,7 +18,7 @@ if (!file.exists(figureDir)){
 ```
 ## Simulations
 ### Random sampling from the exponential distribution 
-The function rexp of R stat package creates random values belong to the exponential distribution; and it requires two input parameters, n - number of observations (n = 40) and rate (lambda = 0.2).  The plan is running this simulation function a thousand times, a fairly large number of trials, collecting arithmetic mean of each trial, determining mean and standard deviation of collected trial means.
+The function rexp of R stat package creates random values belong to the exponential distribution; and it requires two input parameters, n - number of observations (n = 40) and rate (lambda = 0.2).  My plan is running this simulation function a thousand times, a fairly large number of trials, then collecting arithmetic mean of each trial.  From collection of trial mean values, the mean and the standard deviation (of the collection) will be determined.
 
 
 ```r
@@ -34,26 +34,24 @@ simMatrix <- replicate(numSim, rexp(n, rate = lambda))
 
 ## getting average for each column of the matrix
 simColMeans <- colMeans(simMatrix)
-
+ 
 ## determining sample mean, sd and variance
 sampleMean <- mean(simColMeans)
 sampleSD <- sd(simColMeans)
 sampleVar <- sampleSD^2
-```
 
-## Random sampling from the normal distribution
-On the other hand, we use rnorm function to draw a thousand values from the normal distribution with mean equals to 1/lambda (mean = 1/lambda) and standard deviation equals to mean divided by square rooted of number of observation (sd = 1/lambda/sqrt(n)). 
-
-
-```r
 ## calculating normal (theoritical) mean, normal standard deviation and variance
 normalMean <- 1/lambda
 normalSD <- 1/lambda/sqrt(40)
 normalVar <- normalSD^2
 
-## making a dataframe storing sample means and random value from the normal distribution
+## making a dataframe storing sample means in "x"" column; and the "y" column contains random values 
+## from the normal distribution with mean equals to the above calculated "normalMean" 
+## and standard deviation equals to "normalSD" 
+
 data <- data.frame(x = simColMeans, y = rnorm(1000, mean = normalMean, sd = normalSD))
 ```
+
 ## Plotting histogram and PDF of sample and PDF of theoritical distribution
 
 ```r
@@ -69,15 +67,17 @@ p <- p + geom_vline(color = "blue", xintercept = 1/lambda)
 ## drawing normal mean
 p <- p + geom_vline(color = "orange", xintercept = sampleMean)
 ## labeling
-p <- p + labs(x = "", y = "Density", title = "")
+p <- p + labs(x = "", y = "Density", title = "Exponential Means Distribution Vs. Normal Distribution")
 ## adding legend
-p <- p + scale_colour_manual(values=c("1"="blue", "2"="orange"), name="", labels = c("Sample", "Theoritical"))
-
-ggsave(file.path(figureDir, "plot1.png"), width=6.4, height=4.8, dpi=124)
+p <- p + scale_colour_manual(
+        values=c("1"="blue", "2"="orange"), 
+        name="", 
+        labels = c("Exponential", "Normal"))
 ```
-![](figure/plot1.png)
 
-## Observation
+![](figure/Rplot01.png)
+
+## Observations
 
 ```r
 round(sampleMean, 4)

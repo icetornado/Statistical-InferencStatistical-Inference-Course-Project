@@ -137,7 +137,7 @@ Then we run another t-test on the Group Two and the Group One with the same set 
 ```{r echo=TRUE}
 t.test(ToothGrowth[ToothGrowth$dose == 2, "len"], ToothGrowth[ToothGrowth$dose == 1, "len"], paired = FALSE, var.equal = FALSE, alternative="two.sided")
 ```
-Again, the p-value is around zero, and the 95% confident interval from 3.733519 8.996481 doesn't contain 0.  The 2mg per day dosage has better impact then 1mg per day dosage.
+Again, the p-value is around zero, and the 95% confident interval from 3.733519 to 8.996481 doesn't contain 0.  The 2mg per day dosage has better impact then 1mg per day dosage.
 
 We do not have to conduct a t-test between the Group Two and the Group Half for obvious reason.
 
@@ -148,5 +148,5 @@ We do not have to conduct a t-test between the Group Two and the Group Half for 
 
 ## Assumptions:
 - Due to lacking of information about data, so we assume that we have simple random samples from the population of guine pigs receiving vitamin C supplement.
-- The populations are normally distributed.  By looking at qqplots, we may say all of them forming along straight lines (excepts OJ vs Len, and 1mg vs len are more S-shaped) 
+- The populations are normally distributed.  By looking at quantile-quantile plots (Firgure 2-2, 2-4), we may say that all of them forming along straight lines (excepts OJ vs Len, and 1mg vs Len plots are more S-shaped) 
 - We assume that data to be collected from 60 different Guinea pigs which received different supplement's delivery methods and doses. Therefore, when we divide Guinea pigs into different groups, we perform unpaired t-tests.

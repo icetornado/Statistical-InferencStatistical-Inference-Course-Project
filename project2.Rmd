@@ -21,6 +21,7 @@ if (!file.exists(figureDir)){
     dir.create(figureDir)
 } 
 data("ToothGrowth")
+ToothGrowth$dose <- as.factor(ToothGrowth$dose)
 ```
 
 ## Data Exploratory

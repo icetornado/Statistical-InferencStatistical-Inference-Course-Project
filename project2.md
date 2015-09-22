@@ -17,6 +17,7 @@ if (!file.exists(figureDir)){
     dir.create(figureDir)
 } 
 data("ToothGrowth")
+ToothGrowth$dose <- as.factor(ToothGrowth$dose)
 ```
 
 ## Data Exploratory
@@ -29,7 +30,7 @@ str(ToothGrowth)
 ## 'data.frame':	60 obs. of  3 variables:
 ##  $ len : num  4.2 11.5 7.3 5.8 6.4 10 11.2 11.2 5.2 7 ...
 ##  $ supp: Factor w/ 2 levels "OJ","VC": 2 2 2 2 2 2 2 2 2 2 ...
-##  $ dose: num  0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 ...
+##  $ dose: Factor w/ 3 levels "0.5","1","2": 1 1 1 1 1 1 1 1 1 1 ...
 ```
 "ToothGrowth" data is a set of 60 observations of 3 variables which are: 
 

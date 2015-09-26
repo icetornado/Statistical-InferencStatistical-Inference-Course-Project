@@ -1,9 +1,12 @@
 # Statistical Inference Course Project - Part 1
 Trieu Tran  
 September 21, 2015  
-## Synopsis
+### Synopsis
 This is the first part of the course project for the statistical inference class. The goal of this project is performing some statistical inferential works such as, exploring inference by using simulation functionality of R to study the exponential distribution then comparing it with Central Limit Theorem.
 
+### Simulations
+#### Random sampling from the exponential distribution 
+The function <strong>rexp</strong> of R stat package creates random values belong to the exponential distribution; and it requires two input parameters, n - number of observations (n = 40) and rate (lambda = 0.2).  My simulation plan is running this function one thousand times, a fairly large number of trials, then collecting arithmetic mean of each trial.
 
 
 ```r
@@ -15,13 +18,7 @@ figureDir <- 'figure'
 if (!file.exists(figureDir)){
     dir.create(figureDir)
 } 
-```
-## Simulations
-### Random sampling from the exponential distribution 
-The function rexp of R stat package creates random values belong to the exponential distribution; and it requires two input parameters, n - number of observations (n = 40) and rate (lambda = 0.2).  My plan is running this simulation function a thousand times, a fairly large number of trials, then collecting arithmetic mean of each trial.  From collection of trial mean values, the mean and the standard deviation (of the collection) will be determined.
 
-
-```r
 ## initializing variables
 set.seed(12345)
 lambda <- 0.2
@@ -52,7 +49,7 @@ normalVar <- normalSD^2
 data <- data.frame(x = simColMeans, y = rnorm(1000, mean = normalMean, sd = normalSD))
 ```
 
-## Plotting histogram and PDF of sample and PDF of theoritical distribution
+#### Plotting histogram and PDF of sample and PDF of theoritical (normal) distribution
 
 ```r
 p <- ggplot(data, aes(x = x))
@@ -77,7 +74,7 @@ p <- p + scale_colour_manual(
 
 ![](figure/Rplot01.png)
 
-## Observations
+### Observations
 
 ```r
 round(sampleMean, 4)
@@ -111,5 +108,7 @@ round(normalVar, 4)
 ## [1] 0.625
 ```
 1. The sample mean **4.9720** (the vertical blue line in the plot) is very close to the theoretical (normal) mean **5.0000** (the vertical orange line in the plot), as predicted
-2. Similiarity, variance of the sample is **0.5954**, also approximately equals to variance of the normal variance **0.6250**
-3. From the above plot, the probability density functions of both sample and theoritical distribution almost overlaps each other. Or we can say that the distribution of the sample means follows the normal distribution, as stated in the Central Limit Theorem.
+2. Similiarity, the variance of the sample is **0.5954**, which is also approximately equal to the variance of the normal distribution **0.6250**
+
+### Conclusions
+From the above plot, the probability density functions of both sample and theoritical distribution almost overlap each other. Or we can say that the distribution of the sample means follows the normal distribution, as stated in the Central Limit Theorem.
